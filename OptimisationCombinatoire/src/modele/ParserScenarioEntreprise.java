@@ -1,9 +1,11 @@
 package modele;
 
+import affichage.Affichage;
+
 public class ParserScenarioEntreprise extends ParserScenario
 {
 	public void stockerInformation(String ligne)
 	{
-		System.out.println("Entreprise : " + ligne);
+		Affichage.afficher("Entreprise : " + ligne);
 	}
 }

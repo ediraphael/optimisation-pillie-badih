@@ -1,4 +1,4 @@
-package modele;
+package affichage;
 
 public class Ecran_console extends Affichage
 {

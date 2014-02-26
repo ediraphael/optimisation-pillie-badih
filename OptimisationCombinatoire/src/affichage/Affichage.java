@@ -1,4 +1,4 @@
-package modele;
+package affichage;
 
 public abstract class Affichage
 {
