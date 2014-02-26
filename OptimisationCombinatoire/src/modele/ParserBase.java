@@ -6,45 +6,54 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.TreeSet;
 
 import affichage.Affichage;
 
 public class ParserBase extends ParserFichier
 {
-	private ArrayList<String> listEntrepriseAllBases = new ArrayList<String>();
-
 	@Override
 	public void loadFile(String fichier)
 	{
+		int coutDeLaBase = 0;
+		int nbElement = 0;
+
+		boolean testAffichage = false;
+		TreeSet<Entreprise> listEntrepriseAllBases = new TreeSet<Entreprise>();
 		try
 		{
 			BufferedReader inputF = new BufferedReader(new FileReader(fichier));
 			try
 			{
 				String line = null;
-				int compteur = 0;
+				int compteur = -2;
 				// On parcours toutes les lignes
 				while ((line = inputF.readLine()) != null)
 				{
-					if(compteur == 0) {
-						System.out.println("Cout de la base pour le fichier ("+fichier+") : " + line);
+					if (compteur == -2)
+					{
+						System.out.println("Cout de la base pour le fichier (" + fichier + ") : " + line);
+						coutDeLaBase = Integer.parseInt(line);
 						compteur++;
-					} else if(compteur == 1) {
-						System.out.println("Nombre d'entreprise composant la base du fichier ("+fichier+") : " + line);
+					} else if (compteur == -1)
+					{
+						System.out.println("Nombre d'entreprise composant la base du fichier (" + fichier + ") : " + line);
+						nbElement = Integer.parseInt(line);
 						compteur++;
-					} else {
-						listEntrepriseAllBases.add(line.replaceAll("\\s", " ").toUpperCase());
-
-						Collections.sort(listEntrepriseAllBases, new Comparator<String>()
-                        {
-							public int compare(String o1, String o2)
-							{
-								return o1.compareTo(o2);
-							}
-                        });
-
-						//System.out.println("Base : " + line.replaceAll("\\s", " ").toUpperCase());
+					} else
+					{
+						compteur++;
+						listEntrepriseAllBases.add(new Entreprise(line.trim().replaceAll("\\s", " ").toUpperCase()));
 					}
+				}
+				// Incohérence des données
+				if (nbElement != compteur)
+				{
+					Affichage.afficher("Erreur: Incohérence des données dans le fichier (" + fichier + ").\n NbElementAttendu :" + nbElement + "\n nbElement réel :" + compteur);
+				} else
+				{
+					Base base = new Base(fichier, coutDeLaBase, listEntrepriseAllBases);
+					
 				}
 			} finally
 			{
@@ -56,13 +65,4 @@ public class ParserBase extends ParserFichier
 			Affichage.afficher("Erreur:loadFile(" + fichier + "):" + ex.getMessage());
 		}
 	}
-	
-	public ArrayList<String> getListEntrepriseAllBases() {
-		return listEntrepriseAllBases;
-	}
-
-	public void setListEntrepriseAllBases(ArrayList<String> listEntrepriseAllBases) {
-		this.listEntrepriseAllBases = listEntrepriseAllBases;
-	}
-
 }
