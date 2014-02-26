@@ -74,6 +74,6 @@ public class Entreprise implements Comparable<Entreprise>
 	@Override
 	public int compareTo(Entreprise entreprise)
 	{
-		return (this.equals(entreprise)) ? 0 : 1;
+		return this.getNom().compareTo(entreprise.getNom());
 	}
 }
