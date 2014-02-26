@@ -1,6 +1,6 @@
 package modele;
 
-public class AlgoGlouton extends AlgoRecherche
+public class AlgoGloutonMax extends AlgoRecherche
 {
 
 	@Override
