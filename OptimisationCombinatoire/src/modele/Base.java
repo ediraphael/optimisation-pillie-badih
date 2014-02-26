@@ -25,6 +25,11 @@ public class Base
 		this.entreprises = new ArrayList<Entreprise>();
 	}
 
+	public boolean addEntreprise(Entreprise entreprise)
+	{
+		return this.entreprises.add(entreprise);
+	}
+
 	public String getNom()
 	{
 		return nom;
