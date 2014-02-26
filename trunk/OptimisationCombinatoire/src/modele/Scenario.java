@@ -37,32 +37,15 @@ public class Scenario
 			if (base.getNom().equals(baseUpdate.getNom()))
 			{
 				// On supprime toutes les entreprises inutiles
-				System.out.println(baseUpdate.getNom());
-				for (Entreprise entreprise : baseUpdate.getEntreprises())
-				{
-					System.out.println("\t"+entreprise.getNom());
-				}
-				System.out.println("On garde ");
-				for (Entreprise entreprise : entreprises)
-				{
-					System.out.println("\t"+entreprise.getNom());
-				}
 				baseUpdate.getEntreprises().retainAll(entreprises);
-				System.out.println("Apres");
-				for (Entreprise entreprise : baseUpdate.getEntreprises())
-				{
-					System.out.println("\t"+entreprise.getNom());
-				}
 				// On met la liste d'entreprise de la base
 				base.setEntreprises(baseUpdate.getEntreprises());
 				// On met a jour le cout de la base
 				base.setCout(baseUpdate.getCout());
 				for (Entreprise entreprise : entreprises)
 				{
-					System.out.println("coucou");
 					if (base.getEntreprises().contains(entreprise))
 					{
-						System.out.println("Ajout de " + base.getNom() + " a " + entreprise.getNom());
 						entreprise.addBase(base);
 					}
 				}
