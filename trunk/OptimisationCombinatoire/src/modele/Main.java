@@ -16,9 +16,6 @@ public class Main
 			String file = "Data/Bases/Base "+i+".txt";
 			parserB.loadFile(file);
 		}
-		for(String ent : parserB.getListEntrepriseAllBases()) {
-			System.out.println(ent);
-		}
 		//System.out.println(parserB.getListEntrepriseAllBases());
 		
 

@@ -1,6 +1,6 @@
 package modele;
 
-import java.util.ArrayList;
+import java.util.TreeSet;
 
 public class Base
 {
@@ -9,20 +9,33 @@ public class Base
 	 */
 	private String nom;
 	/**
+	 * Cout d'accees à la base
+	 */
+	private int cout;
+	/**
 	 * Liste des entreprises présent dans la base
 	 */
-	private ArrayList<Entreprise> entreprises;
+	private TreeSet<Entreprise> entreprises;
 
-	public Base(String nom, ArrayList<Entreprise> entreprises)
+	public Base(String nom, int cout, TreeSet<Entreprise> entreprises)
 	{
 		this.nom = nom;
+		this.cout = cout;
+		this.entreprises = entreprises;
+	}
+
+	public Base(String nom, TreeSet<Entreprise> entreprises)
+	{
+		this.nom = nom;
+		this.cout = 0;
 		this.entreprises = entreprises;
 	}
 
 	public Base(String nom)
 	{
 		this.nom = nom;
-		this.entreprises = new ArrayList<Entreprise>();
+		this.cout = 0;
+		this.entreprises = new TreeSet<Entreprise>();
 	}
 
 	public boolean addEntreprise(Entreprise entreprise)
@@ -40,13 +53,23 @@ public class Base
 		this.nom = nom;
 	}
 
-	public ArrayList<Entreprise> getEntreprises()
+	public TreeSet<Entreprise> getEntreprises()
 	{
 		return entreprises;
 	}
 
-	public void setEntreprises(ArrayList<Entreprise> entreprises)
+	public void setEntreprises(TreeSet<Entreprise> entreprises)
 	{
 		this.entreprises = entreprises;
+	}
+
+	public int getCout()
+	{
+		return cout;
+	}
+
+	public void setCout(int cout)
+	{
+		this.cout = cout;
 	}
 }

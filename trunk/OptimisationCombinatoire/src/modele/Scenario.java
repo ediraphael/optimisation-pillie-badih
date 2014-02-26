@@ -1,19 +1,21 @@
 package modele;
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Scenario
 {
 	/**
 	 * Liste des bases
 	 */
-	public static ArrayList<Base> bases;
+	public static TreeSet<Base> bases;
 	/**
 	 * Liste des entreprises
 	 */
-	public static ArrayList<Entreprise> entreprises;
+	public static TreeSet<Entreprise> entreprises;
 
-	public Scenario(ArrayList<Base> bases, ArrayList<Entreprise> entreprises)
+	public Scenario(TreeSet<Base> bases, TreeSet<Entreprise> entreprises)
 	{
 		Scenario.bases = bases;
 		Scenario.entreprises = entreprises;
@@ -21,8 +23,8 @@ public class Scenario
 
 	public Scenario()
 	{
-		Scenario.bases = new ArrayList<Base>();
-		Scenario.entreprises = new ArrayList<Entreprise>();
+		Scenario.bases = new TreeSet<Base>();
+		Scenario.entreprises = new TreeSet<Entreprise>();
 	}
 
 	public static boolean addBase(Base base)
@@ -35,22 +37,36 @@ public class Scenario
 		return Scenario.entreprises.add(entreprise);
 	}
 
-	public ArrayList<Base> getBases()
+	public void launch(String listeBase,String listeEntreprise)
+	{
+		ParserBase parserBase = new ParserBase();
+		ParserScenarioBase parserScenarioBase = new ParserScenarioBase();
+		ParserScenarioEntreprise parserScenarioEntreprise = new ParserScenarioEntreprise();
+		
+		parserScenarioBase.loadFile(listeBase);
+		parserScenarioEntreprise.loadFile(listeEntreprise);
+		for (Base base : bases)
+		{
+			parserBase.loadFile(base.getNom());
+		}
+	}
+
+	public TreeSet<Base> getBases()
 	{
 		return bases;
 	}
 
-	public void setBases(ArrayList<Base> bases)
+	public void setBases(TreeSet<Base> bases)
 	{
 		Scenario.bases = bases;
 	}
 
-	public ArrayList<Entreprise> getEntreprises()
+	public TreeSet<Entreprise> getEntreprises()
 	{
 		return entreprises;
 	}
 
-	public void setEntreprises(ArrayList<Entreprise> entreprises)
+	public void setEntreprises(TreeSet<Entreprise> entreprises)
 	{
 		Scenario.entreprises = entreprises;
 	}
