@@ -15,15 +15,14 @@ public abstract class ParserScenario extends ParserFichier
 		try
 		{
 			BufferedReader inputF = new BufferedReader(new FileReader(fichier));
-			int nbNoeud = 0;
 			try
 			{
 				String line = null;
-				int compteur = 0;
+				int compteur = -1;
 				// On parcours toutes les lignes
 				while ((line = inputF.readLine()) != null)
 				{
-					if (compteur == 0)
+					if (compteur == -1)
 					{
 						compteur++;
 						nbElement = Integer.parseInt(line);
@@ -31,9 +30,15 @@ public abstract class ParserScenario extends ParserFichier
 					{
 						if (!"".equals(line))
 						{
+							compteur++;
 							stockerInformation(line);
 						}
 					}
+
+				}
+				if (compteur != nbElement)
+				{
+					Affichage.afficher("Erreur de fichier, donnée incoherente.\n NbElement attendu : " + nbElement + "\n Etat Compteur :" + compteur);
 				}
 			} finally
 			{
