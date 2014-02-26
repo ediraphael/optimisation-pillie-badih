@@ -6,6 +6,8 @@ public class ParserScenarioEntreprise extends ParserScenario
 {
 	public void stockerInformation(String ligne)
 	{
-		Affichage.afficher("Entreprise : " + ligne);
+		String nomEntreprise = ligne.trim().toUpperCase().replaceAll("\\s", " ");
+		Affichage.afficher("Entreprise : " + nomEntreprise);
+		Scenario.addEntreprise(new Entreprise(nomEntreprise));
 	}
 }
