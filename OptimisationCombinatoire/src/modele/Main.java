@@ -17,7 +17,7 @@ public class Main
 			parserB.loadFile(file);
 		}
 		for(String ent : parserB.getListEntrepriseAllBases()) {
-			System.out.println(ent+"\n");
+			System.out.println(ent);
 		}
 		//System.out.println(parserB.getListEntrepriseAllBases());
 		
