@@ -47,8 +47,8 @@ public abstract class ParserScenario extends ParserFichier
 			}
 		} catch (IOException ex)
 		{
-			System.err.println("Erreur Graphe:loadFile(" + fichier + "):" + ex.getMessage());
-			Affichage.afficher("Erreur Graphe:loadFile(" + fichier + "):" + ex.getMessage());
+			System.err.println("Erreur:loadFile(" + fichier + "):" + ex.getMessage());
+			Affichage.afficher("Erreur:loadFile(" + fichier + "):" + ex.getMessage());
 		}
 	}
 
