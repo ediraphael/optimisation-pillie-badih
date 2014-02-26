@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import affichage.Affichage;
+
 public abstract class ParserScenario extends ParserFichier
 {
 
