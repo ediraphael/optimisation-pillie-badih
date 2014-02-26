@@ -19,6 +19,12 @@ public class Base
 		this.entreprises = entreprises;
 	}
 
+	public Base(String nom)
+	{
+		this.nom = nom;
+		this.entreprises = new ArrayList<Entreprise>();
+	}
+
 	public String getNom()
 	{
 		return nom;
