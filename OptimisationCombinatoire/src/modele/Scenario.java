@@ -36,8 +36,36 @@ public class Scenario
 		{
 			if (base.getNom().equals(baseUpdate.getNom()))
 			{
+				// On supprime toutes les entreprises inutiles
+				System.out.println(baseUpdate.getNom());
+				for (Entreprise entreprise : baseUpdate.getEntreprises())
+				{
+					System.out.println("\t"+entreprise.getNom());
+				}
+				System.out.println("On garde ");
+				for (Entreprise entreprise : entreprises)
+				{
+					System.out.println("\t"+entreprise.getNom());
+				}
+				baseUpdate.getEntreprises().retainAll(entreprises);
+				System.out.println("Apres");
+				for (Entreprise entreprise : baseUpdate.getEntreprises())
+				{
+					System.out.println("\t"+entreprise.getNom());
+				}
+				// On met la liste d'entreprise de la base
 				base.setEntreprises(baseUpdate.getEntreprises());
+				// On met a jour le cout de la base
 				base.setCout(baseUpdate.getCout());
+				for (Entreprise entreprise : entreprises)
+				{
+					System.out.println("coucou");
+					if (base.getEntreprises().contains(entreprise))
+					{
+						System.out.println("Ajout de " + base.getNom() + " a " + entreprise.getNom());
+						entreprise.addBase(base);
+					}
+				}
 			}
 		}
 	}
@@ -49,12 +77,16 @@ public class Scenario
 
 	public void launch(String listeBase, String listeEntreprise)
 	{
+		// On initialise les parseurs
 		ParserBase parserBase = new ParserBase();
 		ParserScenarioBase parserScenarioBase = new ParserScenarioBase();
 		ParserScenarioEntreprise parserScenarioEntreprise = new ParserScenarioEntreprise();
 
+		// On recupère les listes que l'utilisateur fournit
 		parserScenarioBase.loadFile(listeBase);
 		parserScenarioEntreprise.loadFile(listeEntreprise);
+
+		// On chage les bases
 		for (Base base : bases)
 		{
 			parserBase.loadFile("Data/Bases/" + base.getNom());
@@ -62,7 +94,20 @@ public class Scenario
 
 		System.out.println("Nombre de bases connu : " + bases.size());
 		System.out.println("Nombre d'entreprise recherché : " + entreprises.size());
+		for (Entreprise entreprise : entreprises)
+		{
+			System.out.println(entreprise.getNom());
+		}
 		System.out.println("Test de recherche sur la premiere base : " + bases.first().getEntreprises().size());
+		for (Base base : bases)
+		{
+			System.out.println(base.getNom());
+			for (Entreprise entreprise : base.getEntreprises())
+			{
+				System.out.println("\t" + entreprise.getNom());
+			}
+		}
+		System.out.println("Test de recherche sur la premiere entreprise : " + entreprises.first().getNom() + " " + entreprises.first().getBases().size());
 	}
 
 	public TreeSet<Base> getBases()
