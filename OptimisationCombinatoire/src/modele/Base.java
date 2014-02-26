@@ -96,7 +96,7 @@ public class Base implements Comparable<Base>
 	@Override
 	public int compareTo(Base base)
 	{
-		return (this.equals(base))?0:1;
+		return this.getNom().compareTo(base.getNom());
 	}
 	
 	
