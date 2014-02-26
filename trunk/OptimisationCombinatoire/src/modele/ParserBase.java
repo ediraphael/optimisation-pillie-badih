@@ -26,6 +26,7 @@ public class ParserBase extends ParserFichier
 				// On parcours toutes les lignes
 				while ((line = inputF.readLine()) != null)
 				{
+					System.out.println(line);
 					if (compteur == -2)
 					{
 						System.out.println("Cout de la base pour le fichier (" + fichier + ") : " + line);
