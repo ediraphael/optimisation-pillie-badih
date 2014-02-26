@@ -3,7 +3,7 @@ package modele;
 import java.util.ArrayList;
 
 //Test
-public class Entreprise
+public class Entreprise implements Comparable<Entreprise>
 {
 	/**
 	 * Nom de l'entreprise
@@ -25,7 +25,7 @@ public class Entreprise
 		this.nom = nom;
 		this.bases = new ArrayList<Base>();
 	}
-	
+
 	public boolean addBase(Base base)
 	{
 		return bases.add(base);
@@ -61,7 +61,7 @@ public class Entreprise
 		if (getClass() != obj.getClass())
 			return false;
 		Entreprise other = (Entreprise) obj;
-		
+
 		if (nom == null)
 		{
 			if (other.nom != null)
@@ -70,6 +70,10 @@ public class Entreprise
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public int compareTo(Entreprise entreprise)
+	{
+		return (this.equals(entreprise)) ? 0 : 1;
+	}
 }

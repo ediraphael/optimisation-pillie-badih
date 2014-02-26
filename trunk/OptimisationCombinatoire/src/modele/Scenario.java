@@ -32,23 +32,39 @@ public class Scenario
 		return Scenario.bases.add(base);
 	}
 
+	public static void updateBase(Base baseUpdate)
+	{
+		for (Base base : bases)
+		{
+			if (base.getNom().equals(baseUpdate.getNom()))
+			{
+				base.setEntreprises(baseUpdate.getEntreprises());
+				base.setCout(baseUpdate.getCout());
+			}
+		}
+	}
+
 	public static boolean addEntreprise(Entreprise entreprise)
 	{
 		return Scenario.entreprises.add(entreprise);
 	}
 
-	public void launch(String listeBase,String listeEntreprise)
+	public void launch(String listeBase, String listeEntreprise)
 	{
 		ParserBase parserBase = new ParserBase();
 		ParserScenarioBase parserScenarioBase = new ParserScenarioBase();
 		ParserScenarioEntreprise parserScenarioEntreprise = new ParserScenarioEntreprise();
-		
+
 		parserScenarioBase.loadFile(listeBase);
 		parserScenarioEntreprise.loadFile(listeEntreprise);
 		for (Base base : bases)
 		{
-			parserBase.loadFile(base.getNom());
+			parserBase.loadFile("Data/Bases/" + base.getNom());
 		}
+
+		System.out.println("Nombre de bases connu : " + bases.size());
+		System.out.println("Nombre d'entreprise recherché : " + entreprises.size());
+		System.out.println("Test de recherche sur la premiere base : " + bases.first().getEntreprises().size());
 	}
 
 	public TreeSet<Base> getBases()

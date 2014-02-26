@@ -52,8 +52,11 @@ public class ParserBase extends ParserFichier
 					Affichage.afficher("Erreur: Incohérence des données dans le fichier (" + fichier + ").\n NbElementAttendu :" + nbElement + "\n nbElement réel :" + compteur);
 				} else
 				{
-					Base base = new Base(fichier, coutDeLaBase, listEntrepriseAllBases);
-					
+					String nomBase = "";
+					String[] temp = fichier.split("/");
+					nomBase = temp[temp.length - 1];
+					Base base = new Base(nomBase, coutDeLaBase, listEntrepriseAllBases);
+					Scenario.updateBase(base);
 				}
 			} finally
 			{
