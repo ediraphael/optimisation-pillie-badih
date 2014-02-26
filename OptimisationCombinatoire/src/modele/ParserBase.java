@@ -26,15 +26,14 @@ public class ParserBase extends ParserFichier
 				// On parcours toutes les lignes
 				while ((line = inputF.readLine()) != null)
 				{
-					System.out.println(line);
 					if (compteur == -2)
 					{
-						System.out.println("Cout de la base pour le fichier (" + fichier + ") : " + line);
+						//Affichage.afficher("Cout de la base pour le fichier (" + fichier + ") : " + line);
 						coutDeLaBase = Integer.parseInt(line);
 						compteur++;
 					} else if (compteur == -1)
 					{
-						System.out.println("Nombre d'entreprise composant la base du fichier (" + fichier + ") : " + line);
+						//Affichage.afficher("Nombre d'entreprise composant la base du fichier (" + fichier + ") : " + line);
 						nbElement = Integer.parseInt(line);
 						compteur++;
 					} else

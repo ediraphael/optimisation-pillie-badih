@@ -97,7 +97,5 @@ public class Base implements Comparable<Base>
 	public int compareTo(Base base)
 	{
 		return this.getNom().compareTo(base.getNom());
-	}
-	
-	
+	}	
 }
