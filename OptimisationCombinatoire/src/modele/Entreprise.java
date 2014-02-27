@@ -2,7 +2,6 @@ package modele;
 
 import java.util.ArrayList;
 
-//Test
 public class Entreprise implements Comparable<Entreprise>
 {
 	/**
