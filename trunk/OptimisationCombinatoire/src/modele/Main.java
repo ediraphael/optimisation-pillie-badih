@@ -21,6 +21,6 @@ public class Main
 		scenario.loadDatas(listeBase, listeEntreprise);
 		scenario.launchBranchAndBound();
 		long start2 = System.currentTimeMillis();
-		System.out.println("durée chargement fichier noeuds: " + ((float) (start2 - start)) / 1000 + "s");
+		System.out.println("Durée de calcul : " + ((float) (start2 - start)) / 1000 + "s");
 	}
 }
