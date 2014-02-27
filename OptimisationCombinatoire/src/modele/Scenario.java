@@ -42,6 +42,7 @@ public class Scenario
 				base.setEntreprises(baseUpdate.getEntreprises());
 				// On met a jour le cout de la base
 				base.setCout(baseUpdate.getCout());
+				// On met à jour les informations entreprises sur leurs bases
 				for (Entreprise entreprise : entreprises)
 				{
 					if (base.getEntreprises().contains(entreprise))
@@ -83,12 +84,14 @@ public class Scenario
 		}
 		bases=basesTrie;
 		//Meme opération pour les entreprise
+		Entreprise.triage=true;
 		TreeSet<Entreprise> entrepriseTrie = new TreeSet<Entreprise>();
 		for (Entreprise entreprise : entreprises)
 		{
 			entrepriseTrie.add(entreprise);
 		}
 		entreprises=entrepriseTrie;
+		Entreprise.triage=false;
 		
 		System.out.println("Nombre de bases connu : " + bases.size());
 		System.out.println("Nombre d'entreprise recherché : " + entreprises.size());

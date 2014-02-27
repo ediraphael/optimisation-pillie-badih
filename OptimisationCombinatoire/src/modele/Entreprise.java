@@ -12,6 +12,7 @@ public class Entreprise implements Comparable<Entreprise>
 	 * Liste des bases dans lesquelle l'entreprise est présente
 	 */
 	private ArrayList<Base> bases;
+	public static boolean triage=false;
 
 	public Entreprise(String nom, ArrayList<Base> bases)
 	{
@@ -73,6 +74,16 @@ public class Entreprise implements Comparable<Entreprise>
 	@Override
 	public int compareTo(Entreprise entreprise)
 	{
+		if (triage)
+		{
+			if (this.getBases().size() < entreprise.getBases().size())
+			{
+				return 1;
+			} else if (this.getBases().size() > entreprise.getBases().size())
+			{
+				return -1;
+			}
+		}
 		return this.getNom().compareTo(entreprise.getNom());
 	}
 }
