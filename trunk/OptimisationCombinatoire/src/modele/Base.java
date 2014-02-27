@@ -77,25 +77,48 @@ public class Base implements Comparable<Base>
 	public boolean equals(Object obj)
 	{
 		if (this == obj)
+		{
 			return true;
+		}
 		if (obj == null)
+		{
 			return false;
+		}
 		if (getClass() != obj.getClass())
+		{
 			return false;
+		}
 		Base other = (Base) obj;
-		
+
 		if (nom == null)
 		{
 			if (other.nom != null)
+			{
 				return false;
+			}
 		} else if (!nom.equals(other.nom))
+		{
 			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public int compareTo(Base base)
 	{
+		if (this.getEntreprises().size() < base.getEntreprises().size())
+		{
+			return 1;
+		} else if (this.getEntreprises().size() > base.getEntreprises().size())
+		{
+			return -1;
+		} else if (this.getCout() < base.getCout())
+		{
+			return -1;
+		} else if (this.getCout() > base.getCout())
+		{
+			return 1;
+		}
 		return this.getNom().compareTo(base.getNom());
-	}	
+	}
 }

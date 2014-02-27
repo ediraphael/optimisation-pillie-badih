@@ -74,12 +74,31 @@ public class Scenario
 		{
 			parserBase.loadFile("Data/Bases/" + base.getNom());
 		}
-
+		//On trie les bases en fonction des de leurs nombre d'entreprise
+		//il suffit de recréer un TreeSet avec les bases complete, et le comparator fait le reste
+		TreeSet<Base> basesTrie = new TreeSet<Base>();
+		for (Base base : bases)
+		{
+			basesTrie.add(base);
+		}
+		bases=basesTrie;
+		//Meme opération pour les entreprise
+		TreeSet<Entreprise> entrepriseTrie = new TreeSet<Entreprise>();
+		for (Entreprise entreprise : entreprises)
+		{
+			entrepriseTrie.add(entreprise);
+		}
+		entreprises=entrepriseTrie;
+		
 		System.out.println("Nombre de bases connu : " + bases.size());
 		System.out.println("Nombre d'entreprise recherché : " + entreprises.size());
 		for (Entreprise entreprise : entreprises)
 		{
 			System.out.println(entreprise.getNom());
+			for (Base base : entreprise.getBases())
+			{
+				System.out.println("\t" + base.getNom());
+			}
 		}
 		System.out.println("Test de recherche sur la premiere base : " + bases.first().getEntreprises().size());
 		for (Base base : bases)
