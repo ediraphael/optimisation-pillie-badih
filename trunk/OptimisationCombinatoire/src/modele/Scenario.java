@@ -59,7 +59,19 @@ public class Scenario
 		return Scenario.entreprises.add(entreprise);
 	}
 
-	public void launch(String listeBase, String listeEntreprise)
+	public void launchGlouton()
+	{
+		AlgoRecherche algo = new AlgoGloutonMax();
+		algo.rechercher(this);
+	}
+
+	public void launchBranchAndBound()
+	{
+		AlgoRecherche algo = new AlgoBranchAndBound();
+		algo.rechercher(this);
+	}
+
+	public void loadDatas(String listeBase, String listeEntreprise)
 	{
 		// On initialise les parseurs
 		ParserBase parserBase = new ParserBase();
@@ -75,44 +87,39 @@ public class Scenario
 		{
 			parserBase.loadFile("Data/Bases/" + base.getNom());
 		}
-		//On trie les bases en fonction des de leurs nombre d'entreprise
-		//il suffit de recréer un TreeSet avec les bases complete, et le comparator fait le reste
+		// On trie les bases en fonction des de leurs nombre d'entreprise
+		// il suffit de recréer un TreeSet avec les bases complete, et le
+		// comparator fait le reste
 		TreeSet<Base> basesTrie = new TreeSet<Base>();
 		for (Base base : bases)
 		{
 			basesTrie.add(base);
 		}
-		bases=basesTrie;
-		//Meme opération pour les entreprise
-		Entreprise.triage=true;
+		bases = basesTrie;
+		// Meme opération pour les entreprise
+		Entreprise.triage = true;
 		TreeSet<Entreprise> entrepriseTrie = new TreeSet<Entreprise>();
 		for (Entreprise entreprise : entreprises)
 		{
 			entrepriseTrie.add(entreprise);
 		}
-		entreprises=entrepriseTrie;
-		Entreprise.triage=false;
-		
-		System.out.println("Nombre de bases connu : " + bases.size());
-		System.out.println("Nombre d'entreprise recherché : " + entreprises.size());
-		for (Entreprise entreprise : entreprises)
-		{
-			System.out.println(entreprise.getNom());
-			for (Base base : entreprise.getBases())
-			{
-				System.out.println("\t" + base.getNom());
-			}
-		}
-		System.out.println("Test de recherche sur la premiere base : " + bases.first().getEntreprises().size());
-		for (Base base : bases)
-		{
-			System.out.println(base.getNom());
-			for (Entreprise entreprise : base.getEntreprises())
-			{
-				System.out.println("\t" + entreprise.getNom());
-			}
-		}
-		System.out.println("Test de recherche sur la premiere entreprise : " + entreprises.first().getNom() + " " + entreprises.first().getBases().size());
+		entreprises = entrepriseTrie;
+		Entreprise.triage = false;
+		/*
+		 * System.out.println("Nombre de bases connu : " + bases.size());
+		 * System.out.println("Nombre d'entreprise recherché : " +
+		 * entreprises.size()); for (Entreprise entreprise : entreprises) {
+		 * System.out.println(entreprise.getNom()); for (Base base :
+		 * entreprise.getBases()) { System.out.println("\t" + base.getNom()); }
+		 * } System.out.println("Test de recherche sur la premiere base : " +
+		 * bases.first().getEntreprises().size()); for (Base base : bases) {
+		 * System.out.println(base.getNom()); for (Entreprise entreprise :
+		 * base.getEntreprises()) { System.out.println("\t" +
+		 * entreprise.getNom()); } }
+		 * System.out.println("Test de recherche sur la premiere entreprise : "
+		 * + entreprises.first().getNom() + " " +
+		 * entreprises.first().getBases().size());
+		 */
 	}
 
 	public TreeSet<Base> getBases()

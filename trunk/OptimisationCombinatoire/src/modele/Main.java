@@ -17,6 +17,7 @@ public class Main
 		String listeBase = "Data/ScВnarios/Liste Bases/Liste Bases1.txt";
 
 		Scenario scenario = new Scenario();
-		scenario.launch(listeBase, listeEntreprise);
+		scenario.loadDatas(listeBase, listeEntreprise);
+		scenario.launchBranchAndBound();
 	}
 }
