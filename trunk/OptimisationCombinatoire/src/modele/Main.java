@@ -19,7 +19,8 @@ public class Main
 		Scenario scenario = new Scenario();
 		long start = System.currentTimeMillis();
 		scenario.loadDatas(listeBase, listeEntreprise);
-		scenario.launchBranchAndBound();
+		scenario.launchGlouton();
+		//scenario.launchBranchAndBound();
 		long start2 = System.currentTimeMillis();
 		System.out.println("Durée de calcul : " + ((float) (start2 - start)) / 1000 + "s");
 	}
