@@ -99,9 +99,21 @@ public class Scenario
 		}
 	}
 	
-	public void launchGlouton()
+	public void launchGloutonMax()
 	{
-		AlgoRecherche algo = new AlgoGloutonMax();
+		AlgoRecherche algo = new AlgoGloutonEntrepriseMax();
+		algo.rechercher(this);
+	}
+	
+	public void launchGloutonCoutMax()
+	{
+		AlgoRecherche algo = new AlgoGloutonCoutMax();
+		algo.rechercher(this);
+	}
+	
+	public void launchGloutonCoutMin()
+	{
+		AlgoRecherche algo = new AlgoGloutonCoutMin();
 		algo.rechercher(this);
 	}
 
