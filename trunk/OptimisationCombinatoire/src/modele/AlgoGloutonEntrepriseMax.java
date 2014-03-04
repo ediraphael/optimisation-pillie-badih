@@ -2,12 +2,13 @@ package modele;
 
 import java.util.ArrayList;
 
-public class AlgoGloutonMax extends AlgoRecherche
+public class AlgoGloutonEntrepriseMax extends AlgoRecherche
 {
 	private ArrayList<Base> bases;
 	private ArrayList<Entreprise> entreprises;
 	private int coutOptimal;
 	private ArrayList<Base> baseOptimal;
+	private ArrayList<Base> basesTemp1 = new ArrayList<Base>();
 	
 	@Override
 	public void rechercher(Scenario scenario)
@@ -21,6 +22,12 @@ public class AlgoGloutonMax extends AlgoRecherche
 				this.bases.add(base);
 				System.out.println("la "+base.getNom()+" a pour taille: "+base.getEntreprises().size()+" est pour cout: "+base.getCout());
 			}
+		}
+		
+		System.out.println("*****************************************");
+		this.sortCout(bases, basesTemp1);
+		for(Base base : basesTemp1) {
+			System.out.println("la "+base.getNom()+" a pour taille: "+base.getEntreprises().size()+" est pour cout: "+base.getCout());
 		}
 
 		// On fait une copie des entreprises
@@ -55,6 +62,7 @@ public class AlgoGloutonMax extends AlgoRecherche
 			bases.add(base);
 		}
 		
+		
 		// On prend la première base qui vient dans la liste
 		Base base = bases.get(0);
 		// Puis on la supprime de la liste pour plus tard
@@ -82,6 +90,18 @@ public class AlgoGloutonMax extends AlgoRecherche
 		
 		if((entreprises.size() != 0) && (bases.size() != 0)) {
 			recursive(entreprises, bases);
+		}
+	}
+	
+	void sortCout(ArrayList<Base> bases, ArrayList<Base> basesActuel) {
+		Base baseCoutMax = bases.get(0);
+		for(Base base : bases) {
+			if(base.getCout()>baseCoutMax.getCout()) { baseCoutMax=base;}
+		}
+		basesActuel.add(baseCoutMax);
+		bases.remove(baseCoutMax);
+		if(bases.size()!=0){
+			sortCout(bases, basesActuel);
 		}
 	}
 
