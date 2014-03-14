@@ -51,44 +51,48 @@ public class AlgoBranchAndBound extends AlgoRecherche
 		// On parcours la liste des bases de qui contienne l'entreprise
 		for (Base base : entreprise.getBases())
 		{
-			// Si on a pas déja acheter la base
+
+			/*
+			 * for (int i = 1; i < profondeur; i++) { System.out.print("  "); }
+			 * System.out.println(base.getNom() + ", il reste " +
+			 * entreprises.size() + " entreprises");
+			 */
+			// On calcul le cout total que ça nous ferait
+			int coutRelatif = coutActuel;
 			if (!bases.contains(base))
 			{
-				/*
-				 * for(int i=1;i<profondeur;i++) { System.out.print("  "); }
-				 * System
-				 * .out.println(base.getNom()+", il reste "+entreprises.size
-				 * ()+" entreprises");
-				 */
-				// On calcul le cout total que ça nous ferait
-				int coutRelatif = coutActuel + base.getCout();
-				// Si le cout relatif est inférieur a notre cout optimal alors
-				// on continu
-				if (coutRelatif < coutOptimal)
+				coutRelatif += base.getCout();
+			}
+
+			// Si le cout relatif est inférieur a notre cout optimal alors
+			// on continu
+			if (coutRelatif < coutOptimal)
+			{
+				// On cré la liste des bases utilisé
+				ArrayList<Base> basesUtilise = new ArrayList<Base>(bases);
+				if (!bases.contains(base))
 				{
-					// On cré la liste des bases utilisé
-					ArrayList<Base> basesUtilise = new ArrayList<Base>(bases);
 					basesUtilise.add(base);
-					// On cré une nouvelle liste d'entreprise qu'il nous reste a
-					// découvrire
-					ArrayList<Entreprise> entreprisesInconnu = new ArrayList<Entreprise>(entreprises);
-					entreprisesInconnu.removeAll(base.getEntreprises());
-					// Si on connait toutes les entreprises
-					if (entreprisesInconnu.size() == 0)
+				}
+				// On cré une nouvelle liste d'entreprise qu'il nous reste a
+				// découvrire
+				ArrayList<Entreprise> entreprisesInconnu = new ArrayList<Entreprise>(entreprises);
+				entreprisesInconnu.remove(entreprise);
+				// Si on connait toutes les entreprises
+				if (entreprisesInconnu.size() == 0)
+				{
+					// Et que le coup que l'on a trouvé est inférieur au
+					// coup optimal
+					// Alors on retient cette solution
+					if (coutRelatif < this.coutOptimal)
 					{
-						// Et que le coup que l'on a trouvé est inférieur au
-						// coup optimal
-						// Alors on retient cette solution
-						if (coutRelatif < this.coutOptimal)
-						{
-							this.coutOptimal = coutRelatif;
-							this.baseOptimal = new ArrayList<Base>(basesUtilise);
-						}
-					} else
-					{
-						// Sinon on continu la recherche
-						this.recursive(entreprisesInconnu, basesUtilise, coutRelatif, profondeur + 1);
+						this.coutOptimal = coutRelatif;
+						this.baseOptimal = new ArrayList<Base>(basesUtilise);
 					}
+				} else
+				{
+					// Sinon on continu la recherche
+					this.recursive(entreprisesInconnu, basesUtilise, coutRelatif, profondeur + 1);
 				}
 			}
 		}
