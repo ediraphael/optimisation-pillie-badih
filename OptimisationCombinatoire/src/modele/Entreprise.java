@@ -12,7 +12,7 @@ public class Entreprise implements Comparable<Entreprise>
 	 * Liste des bases dans lesquelle l'entreprise est présente
 	 */
 	private ArrayList<Base> bases;
-	public static boolean triage=false;
+	public static boolean triage = false;
 
 	public Entreprise(String nom, ArrayList<Base> bases)
 	{
