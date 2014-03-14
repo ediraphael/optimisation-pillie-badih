@@ -2,7 +2,7 @@ package modele;
 
 import java.util.ArrayList;
 
-public class AlgoBranchAndBound extends AlgoRecherche
+public class AlgoBranchAndBoundFast extends AlgoRecherche
 {
 	private ArrayList<Base> bases;
 	private ArrayList<Entreprise> entreprises;
