@@ -117,6 +117,12 @@ public class Scenario
 
 	public void launchBranchAndBound()
 	{
+		AlgoRecherche algo = new AlgoBranchAndBound();
+		algo.rechercher(this);
+	}
+	
+	public void launchBranchAndBoundFast()
+	{
 		AlgoRecherche algo = new AlgoBranchAndBoundFast();
 		algo.rechercher(this);
 	}
