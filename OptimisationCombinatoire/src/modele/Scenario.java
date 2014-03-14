@@ -97,7 +97,7 @@ public class Scenario
 		}
 	}
 
-	public void launchGloutonMax()
+	public void launchGloutonEntrepriseMax()
 	{
 		AlgoRecherche algo = new AlgoGloutonEntrepriseMax();
 		algo.rechercher(this);
@@ -117,7 +117,7 @@ public class Scenario
 
 	public void launchBranchAndBound()
 	{
-		AlgoRecherche algo = new AlgoBranchAndBound();
+		AlgoRecherche algo = new AlgoBranchAndBoundFast();
 		algo.rechercher(this);
 	}
 

@@ -70,10 +70,7 @@ public class AlgoGloutonCoutMax extends AlgoRecherche
 			}
 		}
 		// On supprime les entreprises qui sont dans la base actuel
-		for (Entreprise entrepriseRemoveTemp : entrepriseToRemove)
-		{
-			entreprises.remove(entrepriseRemoveTemp);
-		}
+		entreprises.removeAll(entrepriseToRemove);
 
 		// Si on a découvert des entreprises dans la base actuel, on additionne
 		// le cout de la base actuel au cout optimale
