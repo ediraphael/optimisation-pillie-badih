@@ -13,8 +13,8 @@ public class Main
 		 * parserB = new ParserBase(); for(int i=1; i<24; i++) { String file =
 		 * "Data/Bases/Base "+i+".txt"; parserB.loadFile(file); }
 		 */
-		String listeEntreprise = "Data/ScВnarios/Liste Entreprises/Liste Ent1.txt";
-		String listeBase = "Data/ScВnarios/Liste Bases/Liste Bases1.txt";
+		String listeEntreprise = "Data/ScВnarios/Liste Entreprises/Liste Ent1	.txt";
+		String listeBase = "Data/ScВnarios/Liste Bases/Liste Bases2.txt";
 
 		Scenario scenario = new Scenario();
 		long start = System.currentTimeMillis();

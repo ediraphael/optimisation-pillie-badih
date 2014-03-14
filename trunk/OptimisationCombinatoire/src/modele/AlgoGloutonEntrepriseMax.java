@@ -9,25 +9,29 @@ public class AlgoGloutonEntrepriseMax extends AlgoRecherche
 	private int coutOptimal;
 	private ArrayList<Base> baseOptimal;
 	private ArrayList<Base> basesTemp1 = new ArrayList<Base>();
-	
+
 	@Override
 	public void rechercher(Scenario scenario)
 	{
-		// On fait une copie des bases et on ne récupére que les bases ayant une liste d'entreprise différente de null, 
-		// étant donné que nous avons supprimer toutes les entreprises inutile à notre scénario
+		// On fait une copie des bases et on ne récupére que les bases ayant une
+		// liste d'entreprise différente de null,
+		// étant donné que nous avons supprimer toutes les entreprises inutile à
+		// notre scénario
 		this.bases = new ArrayList<Base>();
 		for (Base base : scenario.getBases())
 		{
-			if(base.getEntreprises().size() != 0) {
+			if (base.getEntreprises().size() != 0)
+			{
 				this.bases.add(base);
-				System.out.println("la "+base.getNom()+" a pour taille: "+base.getEntreprises().size()+" est pour cout: "+base.getCout());
+				System.out.println("la " + base.getNom() + " a pour taille: " + base.getEntreprises().size() + " est pour cout: " + base.getCout());
 			}
 		}
-		
+
 		System.out.println("*****************************************");
 		this.sortCout(bases, basesTemp1);
-		for(Base base : basesTemp1) {
-			System.out.println("la "+base.getNom()+" a pour taille: "+base.getEntreprises().size()+" est pour cout: "+base.getCout());
+		for (Base base : basesTemp1)
+		{
+			System.out.println("la " + base.getNom() + " a pour taille: " + base.getEntreprises().size() + " est pour cout: " + base.getCout());
 		}
 
 		// On fait une copie des entreprises
@@ -36,7 +40,7 @@ public class AlgoGloutonEntrepriseMax extends AlgoRecherche
 		{
 			this.entreprises.add(entreprise);
 		}
-		
+
 		this.coutOptimal = 0;
 		this.baseOptimal = new ArrayList<Base>();
 		this.recursive(entreprises, bases);
@@ -47,7 +51,7 @@ public class AlgoGloutonEntrepriseMax extends AlgoRecherche
 		}
 	}
 
-	private void recursive(ArrayList<Entreprise> entreprisesBase, ArrayList<Base> basesMax) 
+	private void recursive(ArrayList<Entreprise> entreprisesBase, ArrayList<Base> basesMax)
 	{
 		boolean checkEntreprises = false;
 
@@ -58,49 +62,61 @@ public class AlgoGloutonEntrepriseMax extends AlgoRecherche
 		{
 			entreprises.add(entrepriseTemp);
 		}
-		for(Base base : basesMax) {
+		for (Base base : basesMax)
+		{
 			bases.add(base);
 		}
-		
-		
+
 		// On prend la première base qui vient dans la liste
 		Base base = bases.get(0);
 		// Puis on la supprime de la liste pour plus tard
 		bases.remove(0);
-		
-		//On parcour la liste des entreprises
+
+		// On parcour la liste des entreprises
 		ArrayList<Entreprise> entrepriseToRemove = new ArrayList<Entreprise>();
-		for(Entreprise entreprise : entreprises) {
-			if(base.getEntreprises().contains(entreprise)) {
+		for (Entreprise entreprise : entreprises)
+		{
+			if (base.getEntreprises().contains(entreprise))
+			{
 				entrepriseToRemove.add(entreprise);
 				checkEntreprises = true;
 			}
 		}
-		//On supprime les entreprises qui sont dans la base actuel
-		for(Entreprise entrepriseRemoveTemp : entrepriseToRemove) {
+		// On supprime les entreprises qui sont dans la base actuel
+		for (Entreprise entrepriseRemoveTemp : entrepriseToRemove)
+		{
 			entreprises.remove(entrepriseRemoveTemp);
 		}
-		
-		//Si on a découvert des entreprises dans la base actuel, on additionne le cout de la base actuel au cout optimale 
-		//Et on rajoute la base actuel dans la la liste des bases optimales
-		if(checkEntreprises) {
+
+		// Si on a découvert des entreprises dans la base actuel, on additionne
+		// le cout de la base actuel au cout optimale
+		// Et on rajoute la base actuel dans la la liste des bases optimales
+		if (checkEntreprises)
+		{
 			coutOptimal = coutOptimal + base.getCout();
 			baseOptimal.add(base);
 		}
-		
-		if((entreprises.size() != 0) && (bases.size() != 0)) {
+
+		if ((entreprises.size() != 0) && (bases.size() != 0))
+		{
 			recursive(entreprises, bases);
 		}
 	}
-	
-	void sortCout(ArrayList<Base> bases, ArrayList<Base> basesActuel) {
+
+	void sortCout(ArrayList<Base> bases, ArrayList<Base> basesActuel)
+	{
 		Base baseCoutMax = bases.get(0);
-		for(Base base : bases) {
-			if(base.getCout()>baseCoutMax.getCout()) { baseCoutMax=base;}
+		for (Base base : bases)
+		{
+			if (base.getCout() > baseCoutMax.getCout())
+			{
+				baseCoutMax = base;
+			}
 		}
 		basesActuel.add(baseCoutMax);
 		bases.remove(baseCoutMax);
-		if(bases.size()!=0){
+		if (bases.size() != 0)
+		{
 			sortCout(bases, basesActuel);
 		}
 	}

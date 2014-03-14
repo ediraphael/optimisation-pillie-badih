@@ -62,7 +62,8 @@ public class AlgoBranchAndBound extends AlgoRecherche
 				 */
 				// On calcul le cout total que ça nous ferait
 				int coutRelatif = coutActuel + base.getCout();
-				// Si le cout relatif est inférieur a notre cout optimal alors on continu
+				// Si le cout relatif est inférieur a notre cout optimal alors
+				// on continu
 				if (coutRelatif < coutOptimal)
 				{
 					// On cré la liste des bases utilisé

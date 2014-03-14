@@ -14,14 +14,12 @@ public class Scenario
 		Scenario.bases = new TreeSet<Base>();
 		Scenario.entreprises = new TreeSet<Entreprise>();
 	}
-	
+
 	/*
-	public Scenario(TreeSet<Base> bases, TreeSet<Entreprise> entreprises)
-	{
-		Scenario.bases = bases;
-		Scenario.entreprises = entreprises;
-	}*/
-	
+	 * public Scenario(TreeSet<Base> bases, TreeSet<Entreprise> entreprises) {
+	 * Scenario.bases = bases; Scenario.entreprises = entreprises; }
+	 */
+
 	public void loadDatas(String listeBase, String listeEntreprise)
 	{
 		// On initialise les parseurs
@@ -37,7 +35,7 @@ public class Scenario
 		{
 			parserBase.loadFile("Data/Bases/" + base.getNom());
 		}
-		
+
 		// On trie les bases en fonction des de leurs nombre d'entreprise
 		// il suffit de recréer un TreeSet avec les bases complete, et le
 		// comparator fait le reste
@@ -47,7 +45,7 @@ public class Scenario
 			basesTrie.add(base);
 		}
 		bases = basesTrie;
-		
+
 		// Meme opération pour les entreprise
 		Entreprise.triage = true;
 		TreeSet<Entreprise> entrepriseTrie = new TreeSet<Entreprise>();
@@ -57,7 +55,7 @@ public class Scenario
 		}
 		entreprises = entrepriseTrie;
 		Entreprise.triage = false;
-		
+
 		/*
 		 * System.out.println("Nombre de bases connu : " + bases.size());
 		 * System.out.println("Nombre d'entreprise recherché : " +
@@ -74,7 +72,7 @@ public class Scenario
 		 * entreprises.first().getBases().size());
 		 */
 	}
-	
+
 	public static void updateBase(Base baseUpdate)
 	{
 		for (Base base : bases)
@@ -98,19 +96,19 @@ public class Scenario
 			}
 		}
 	}
-	
+
 	public void launchGloutonMax()
 	{
 		AlgoRecherche algo = new AlgoGloutonEntrepriseMax();
 		algo.rechercher(this);
 	}
-	
+
 	public void launchGloutonCoutMax()
 	{
 		AlgoRecherche algo = new AlgoGloutonCoutMax();
 		algo.rechercher(this);
 	}
-	
+
 	public void launchGloutonCoutMin()
 	{
 		AlgoRecherche algo = new AlgoGloutonCoutMin();
