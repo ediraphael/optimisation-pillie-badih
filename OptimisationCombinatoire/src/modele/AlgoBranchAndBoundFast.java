@@ -8,10 +8,16 @@ public class AlgoBranchAndBoundFast extends AlgoRecherche
 	private ArrayList<Entreprise> entreprises;
 	private int coutOptimal;
 	private ArrayList<Base> baseOptimal;
+	private ArrayList<String> logs;
+	int majorant;
+	int brancheCoupe;
+	int branche;
+	int noeud;
 
 	@Override
 	public void rechercher(Scenario scenario)
 	{
+		this.logs = new ArrayList<String>();
 		// On fait une copie des bases
 		this.bases = new ArrayList<Base>();
 		for (Base base : scenario.getBases())
@@ -28,11 +34,22 @@ public class AlgoBranchAndBoundFast extends AlgoRecherche
 		this.coutOptimal = Integer.MAX_VALUE;
 		this.baseOptimal = new ArrayList<Base>();
 		this.recursive(entreprises, new ArrayList<Base>(), 0, 0);
-		System.out.println(this.coutOptimal);
+
+		StringBuilder text = new StringBuilder();
+		for (String chaine : logs)
+		{
+			text.append(chaine + "\n");
+		}
+		this.setChaine(this.getChaine() + "\n" + text);
+		this.setChaine(this.getChaine() + "\nCout Optimal :" + coutOptimal);
 		for (Base base : this.baseOptimal)
 		{
-			System.out.println(base.getNom());
+			this.setChaine(this.getChaine() + "\n" + base.getNom());
 		}
+		this.setChaine(this.getChaine() + "\nMajorant :" + majorant);
+		this.setChaine(this.getChaine() + "\nNoeud :" + noeud);
+		this.setChaine(this.getChaine() + "\nBranches :" + branche);
+		this.setChaine(this.getChaine() + "\nBranches Coupées :" + brancheCoupe);
 	}
 
 	private void recursive(ArrayList<Entreprise> entreprisesBase, ArrayList<Base> bases, int coutActuel, int profondeur)
@@ -54,12 +71,15 @@ public class AlgoBranchAndBoundFast extends AlgoRecherche
 			// Si on a pas déja acheter la base
 			if (!bases.contains(base))
 			{
-				/*
-				 * for(int i=1;i<profondeur;i++) { System.out.print("  "); }
-				 * System
-				 * .out.println(base.getNom()+", il reste "+entreprises.size
-				 * ()+" entreprises");
-				 */
+				noeud++;
+				String chaine = "";
+				for (int i = 0; i < profondeur; i++)
+				{
+					chaine += "  ";
+				}
+				chaine += base.getNom() + "-->" + entreprise.getNom() + ". Il reste " + entreprises.size() + " à trouver.";
+				logs.add(chaine);
+
 				// On calcul le cout total que ça nous ferait
 				int coutRelatif = coutActuel + base.getCout();
 				// Si le cout relatif est inférieur a notre cout optimal alors
@@ -76,18 +96,24 @@ public class AlgoBranchAndBoundFast extends AlgoRecherche
 					// Si on connait toutes les entreprises
 					if (entreprisesInconnu.size() == 0)
 					{
+						branche++;
+						majorant++;
 						// Et que le coup que l'on a trouvé est inférieur au
 						// coup optimal
 						// Alors on retient cette solution
-						if (coutRelatif < this.coutOptimal)
-						{
-							this.coutOptimal = coutRelatif;
-							this.baseOptimal = new ArrayList<Base>(basesUtilise);
-						}
+						this.coutOptimal = coutRelatif;
+						this.baseOptimal = new ArrayList<Base>(basesUtilise);
 					} else
 					{
 						// Sinon on continu la recherche
 						this.recursive(entreprisesInconnu, basesUtilise, coutRelatif, profondeur + 1);
+					}
+				} else
+				{
+					branche++;
+					if (entreprises.size() != 0)
+					{
+						brancheCoupe++;
 					}
 				}
 			}
