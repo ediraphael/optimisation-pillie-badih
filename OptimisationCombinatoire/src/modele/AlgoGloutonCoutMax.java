@@ -2,6 +2,8 @@ package modele;
 
 import java.util.ArrayList;
 
+import affichage.Affichage;
+
 public class AlgoGloutonCoutMax extends AlgoRecherche
 {
 	private ArrayList<Base> bases;
@@ -17,7 +19,7 @@ public class AlgoGloutonCoutMax extends AlgoRecherche
 		this.sortCout(scenario.getBases(), bases);
 		for (Base base : bases)
 		{
-			System.out.println("la " + base.getNom() + " a pour taille: " + base.getEntreprises().size() + " est pour cout: " + base.getCout());
+			Affichage.afficher("La " + base.getNom() + " a pour taille: " + base.getEntreprises().size() + " et pour cout: " + base.getCout());
 		}
 
 		// On fait une copie des entreprises
@@ -30,10 +32,10 @@ public class AlgoGloutonCoutMax extends AlgoRecherche
 		this.coutOptimal = 0;
 		this.baseOptimal = new ArrayList<Base>();
 		this.recursive(entreprises, bases);
-		System.out.println(this.coutOptimal);
+		Affichage.afficher(this.coutOptimal);
 		for (Base base : this.baseOptimal)
 		{
-			System.out.println(base.getNom());
+			Affichage.afficher(base.getNom());
 		}
 	}
 
