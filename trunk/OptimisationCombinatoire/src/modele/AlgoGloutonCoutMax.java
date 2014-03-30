@@ -1,7 +1,6 @@
 package modele;
 
 import java.util.ArrayList;
-import java.util.TreeSet;
 
 public class AlgoGloutonCoutMax extends AlgoRecherche
 {
@@ -87,9 +86,9 @@ public class AlgoGloutonCoutMax extends AlgoRecherche
 		}
 	}
 
-	void sortCout(TreeSet<Base> treeSet, ArrayList<Base> basesActuel)
+	void sortCout(ArrayList<Base> treeSet, ArrayList<Base> basesActuel)
 	{
-		Base baseCoutMax = treeSet.first();
+		Base baseCoutMax = treeSet.get(0);
 		for (Base base : treeSet)
 		{
 			if (base.getCout() > baseCoutMax.getCout())

@@ -1,5 +1,6 @@
 package modele;
 
+
 public class Main
 {
 	public static void main(String[] args)
@@ -13,8 +14,12 @@ public class Main
 		 * parserB = new ParserBase(); for(int i=1; i<24; i++) { String file =
 		 * "Data/Bases/Base "+i+".txt"; parserB.loadFile(file); }
 		 */
+
+		
 		String listeEntreprise = "Data/ScВnarios/Liste Entreprises/Liste Ent1.txt";
 		String listeBase = "Data/ScВnarios/Liste Bases/Liste Bases1.txt";
+//		String listeEntreprise = "Data/ScВnarios/Liste Entreprises/ListeEntreprisesExemple.txt";
+//		String listeBase = "Data/ScВnarios/Liste Bases/ListeBasesExemple.txt";
 
 		Scenario scenario = new Scenario();
 		long start = System.currentTimeMillis();
@@ -22,8 +27,8 @@ public class Main
 		//scenario.launchGloutonCoutMin();
 		//scenario.launchGloutonCoutMax();
 		//scenario.launchGloutonEntrepriseMax();
-		//scenario.launchBranchAndBound();
-		scenario.launchBranchAndBoundFast();
+		scenario.launchBranchAndBound();
+		//scenario.launchBranchAndBoundFast();
 		long start2 = System.currentTimeMillis();
 		System.out.println("Durée de calcul : " + ((float) (start2 - start)) / 1000 + "s");
 	}

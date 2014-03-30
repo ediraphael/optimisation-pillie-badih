@@ -1,18 +1,19 @@
 package modele;
 
-import java.util.TreeSet;
+import java.util.ArrayList;
 
 public class Scenario
 {
 	// Liste des bases
-	public static TreeSet<Base> bases;
+	public static ArrayList<Base> bases;
 	// Liste des entreprises
-	public static TreeSet<Entreprise> entreprises;
-
+	public static ArrayList<Entreprise> entreprises;
+	public AlgoRecherche algoRecherche;
+	
 	public Scenario()
 	{
-		Scenario.bases = new TreeSet<Base>();
-		Scenario.entreprises = new TreeSet<Entreprise>();
+		Scenario.bases = new ArrayList<Base>();
+		Scenario.entreprises = new ArrayList<Entreprise>();
 	}
 
 	/*
@@ -39,23 +40,23 @@ public class Scenario
 		// On trie les bases en fonction des de leurs nombre d'entreprise
 		// il suffit de recréer un TreeSet avec les bases complete, et le
 		// comparator fait le reste
-		TreeSet<Base> basesTrie = new TreeSet<Base>();
-		for (Base base : bases)
-		{
-			basesTrie.add(base);
-		}
-		bases = basesTrie;
+//		TreeSet<Base> basesTrie = new TreeSet<Base>();
+//		for (Base base : bases)
+//		{
+//			basesTrie.add(base);
+//		}
+//		bases = basesTrie;
 
 		// Meme opération pour les entreprise
-		Entreprise.triage = true;
-		TreeSet<Entreprise> entrepriseTrie = new TreeSet<Entreprise>();
-		for (Entreprise entreprise : entreprises)
-		{
-			entrepriseTrie.add(entreprise);
-		}
-		entreprises = entrepriseTrie;
-		Entreprise.triage = false;
-
+//		Entreprise.triage = true;
+//		TreeSet<Entreprise> entrepriseTrie = new TreeSet<Entreprise>();
+//		for (Entreprise entreprise : entreprises)
+//		{
+//			entrepriseTrie.add(entreprise);
+//		}
+//		entreprises = entrepriseTrie;
+//		Entreprise.triage = false;
+		
 		/*
 		 * System.out.println("Nombre de bases connu : " + bases.size());
 		 * System.out.println("Nombre d'entreprise recherché : " +
@@ -80,7 +81,7 @@ public class Scenario
 			if (base.getNom().equals(baseUpdate.getNom()))
 			{
 				// On supprime toutes les entreprises inutiles
-				baseUpdate.getEntreprises().retainAll(entreprises);
+				//baseUpdate.getEntreprises().retainAll(entreprises);
 				// On met la liste d'entreprise de la base
 				base.setEntreprises(baseUpdate.getEntreprises());
 				// On met a jour le cout de la base
@@ -99,32 +100,32 @@ public class Scenario
 
 	public void launchGloutonEntrepriseMax()
 	{
-		AlgoRecherche algo = new AlgoGloutonEntrepriseMax();
-		algo.rechercher(this);
+		algoRecherche = new AlgoGloutonEntrepriseMax();
+		algoRecherche.rechercher(this);
 	}
 
 	public void launchGloutonCoutMax()
 	{
-		AlgoRecherche algo = new AlgoGloutonCoutMax();
-		algo.rechercher(this);
+		algoRecherche = new AlgoGloutonCoutMax();
+		algoRecherche.rechercher(this);
 	}
 
 	public void launchGloutonCoutMin()
 	{
-		AlgoRecherche algo = new AlgoGloutonCoutMin();
-		algo.rechercher(this);
+		algoRecherche = new AlgoGloutonCoutMin();
+		algoRecherche.rechercher(this);
 	}
 
 	public void launchBranchAndBound()
 	{
-		AlgoRecherche algo = new AlgoBranchAndBound();
-		algo.rechercher(this);
+		algoRecherche = new AlgoBranchAndBound();
+		algoRecherche.rechercher(this);
 	}
 	
 	public void launchBranchAndBoundFast()
 	{
-		AlgoRecherche algo = new AlgoBranchAndBoundFast();
-		algo.rechercher(this);
+		algoRecherche = new AlgoBranchAndBoundFast();
+		algoRecherche.rechercher(this);
 	}
 
 	public static boolean addBase(Base base)
@@ -137,22 +138,22 @@ public class Scenario
 		return Scenario.entreprises.add(entreprise);
 	}
 
-	public TreeSet<Base> getBases()
+	public ArrayList<Base> getBases()
 	{
 		return bases;
 	}
 
-	public void setBases(TreeSet<Base> bases)
+	public void setBases(ArrayList<Base> bases)
 	{
 		Scenario.bases = bases;
 	}
 
-	public TreeSet<Entreprise> getEntreprises()
+	public ArrayList<Entreprise> getEntreprises()
 	{
 		return entreprises;
 	}
 
-	public void setEntreprises(TreeSet<Entreprise> entreprises)
+	public void setEntreprises(ArrayList<Entreprise> entreprises)
 	{
 		Scenario.entreprises = entreprises;
 	}

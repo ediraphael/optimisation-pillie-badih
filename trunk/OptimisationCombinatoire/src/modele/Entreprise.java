@@ -86,4 +86,10 @@ public class Entreprise implements Comparable<Entreprise>
 		}
 		return this.getNom().compareTo(entreprise.getNom());
 	}
+
+	@Override
+	public String toString()
+	{
+		return "[" + nom + "]";
+	}
 }
