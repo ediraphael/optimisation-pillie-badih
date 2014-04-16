@@ -40,7 +40,6 @@ public class AlgoRecherche extends JPanel implements ActionListener
 			// GrapheClique.progressBar.setClique(GrapheClique.getClique());
 			Thread th = new Thread(new Runnable()
 			{
-
 				@Override
 				public void run()
 				{
@@ -54,6 +53,9 @@ public class AlgoRecherche extends JPanel implements ActionListener
 						break;
 					case "Glouton Cout Min":
 						scenario.launchGloutonCoutMin();
+						break;
+					case "Glouton Entreprise":
+						scenario.launchGloutonEntrepriseMax();
 						break;
 					case "Branch And Bound Fast":
 						scenario.launchBranchAndBoundFast();
@@ -69,7 +71,6 @@ public class AlgoRecherche extends JPanel implements ActionListener
 					long start2 = System.currentTimeMillis();
 					Affichage.afficher(scenario.algoRecherche.getChaine());
 					Affichage.afficher("Durée de calcul : " + ((float) (start2 - start)) / 1000 + "s");
-
 				}
 			});
 			th.start();
